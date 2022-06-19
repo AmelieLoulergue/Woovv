@@ -16,7 +16,7 @@ BookingStatus.destroy_all
 
 bdd = CSV.read("db/db_urls.csv")
 
-User.create(email: "marin@woovv.io", password: 'Woovver4Life')
+User.create(email: "loulergueamelie@yahoo.fr", password: 'loulou2022')
 
 Company.create(legal_name: 'Woovv')
 
