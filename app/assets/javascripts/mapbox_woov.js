@@ -48,8 +48,12 @@ window.onload = function () {
         .split("], [")
         .map((c) => c.split(", "))
         .map((c) => c.map(Number));
-      var latitudes = coordinates.map((c) => c[0]).filter((lat) => lat !== 0);
-      var longitudes = coordinates.map((c) => c[1]).filter((lon) => lon !== 0);
+      var latitudes = coordinates
+        .map((c) => c[0])
+        .filter((lat) => lat !== 0 && lat !== undefined);
+      var longitudes = coordinates
+        .map((c) => c[1])
+        .filter((lon) => lon !== 0 && lon !== undefined);
       if (research[0] !== 0) {
         var box_upper_lat = research[0] + 0.05;
         var box_bottom_lat = research[0] - 0.05;
@@ -133,8 +137,12 @@ window.onload = function () {
         .split("], [")
         .map((c) => c.split(", "))
         .map((c) => c.map(Number));
-      var latitudes = coordinates.map((c) => c[0]).filter((lat) => lat !== 0);
-      var longitudes = coordinates.map((c) => c[1]).filter((lon) => lon !== 0);
+      var latitudes = coordinates
+        .map((c) => c[0])
+        .filter((lat) => lat !== 0 && lat !== undefined);
+      var longitudes = coordinates
+        .map((c) => c[1])
+        .filter((lon) => lon !== 0 && lon !== undefined);
       const map = new mapboxgl.Map({
         container: "map",
         // Replace YOUR_STYLE_URL with your style URL.
