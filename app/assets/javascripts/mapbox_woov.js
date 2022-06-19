@@ -127,36 +127,38 @@ window.onload = function () {
     co_id = co_id.replace("[", "").replace("]", "").split(", ").map(Number);
     var coordinates = document.getElementById("map").attributes[1].value;
     var box_focus = document.getElementById("map").attributes[3].value;
-    coordinates = coordinates.replace("[[", "").replace("]]", "");
-    coordinates = coordinates
-      .split("], [")
-      .map((c) => c.split(", "))
-      .map((c) => c.map(Number));
-    var latitudes = coordinates.map((c) => c[0]).filter((lat) => lat !== 0);
-    var longitudes = coordinates.map((c) => c[1]).filter((lon) => lon !== 0);
-    const map = new mapboxgl.Map({
-      container: "map",
-      // Replace YOUR_STYLE_URL with your style URL.
-      style: "mapbox://styles/amelieloulergue/ckt8hlgfo20tr19v18ez6bpe3",
-      center: [coordinates[0][0], coordinates[0][1]],
-      zoom: 16,
-    });
-    map.addControl(new mapboxgl.NavigationControl()); //zoom +/- navigation
-    // Set marker options.
-    var group = [];
-    for (i = 0; i < coordinates.length; i++) {
-      const marker = new mapboxgl.Marker({
-        color: "#92DACA",
-        draggable: false,
-      })
-        .setLngLat([coordinates[i][0], coordinates[i][1]])
-        .addTo(map);
-      group.push(marker);
+    if (coordinates) {
+      coordinates = coordinates.replace("[[", "").replace("]]", "");
+      coordinates = coordinates
+        .split("], [")
+        .map((c) => c.split(", "))
+        .map((c) => c.map(Number));
+      var latitudes = coordinates.map((c) => c[0]).filter((lat) => lat !== 0);
+      var longitudes = coordinates.map((c) => c[1]).filter((lon) => lon !== 0);
+      const map = new mapboxgl.Map({
+        container: "map",
+        // Replace YOUR_STYLE_URL with your style URL.
+        style: "mapbox://styles/amelieloulergue/ckt8hlgfo20tr19v18ez6bpe3",
+        center: [coordinates[0][0], coordinates[0][1]],
+        zoom: 16,
+      });
+      map.addControl(new mapboxgl.NavigationControl()); //zoom +/- navigation
+      // Set marker options.
+      var group = [];
+      for (i = 0; i < coordinates.length; i++) {
+        const marker = new mapboxgl.Marker({
+          color: "#92DACA",
+          draggable: false,
+        })
+          .setLngLat([coordinates[i][0], coordinates[i][1]])
+          .addTo(map);
+        group.push(marker);
+      }
+      map.fitBounds([
+        [box_upper_lat, box_right_lon], // southwestern corner of the bounds
+        [box_bottom_lat, box_left_lon], // northeastern corner of the bounds
+      ]);
     }
-    map.fitBounds([
-      [box_upper_lat, box_right_lon], // southwestern corner of the bounds
-      [box_bottom_lat, box_left_lon], // northeastern corner of the bounds
-    ]);
   }
   // code map for show coworking (end here)
 };
