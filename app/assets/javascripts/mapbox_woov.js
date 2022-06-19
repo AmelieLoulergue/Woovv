@@ -5,8 +5,10 @@ window.onload = function () {
   const geoElement = document.getElementById("geocoder");
   if (mapElement) {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
+    console.log(mapboxgl.accessToken);
   } else {
     mapboxgl.accessToken = geoElement.dataset.mapboxApiKey;
+    console.log(mapboxgl.accessToken);
   }
 
   // code map for landing page (begin here)
